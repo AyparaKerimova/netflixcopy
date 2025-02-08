@@ -1,0 +1,8 @@
+.login {
+    background: linear-gradient(90deg, rgba(184, 141, 227, 1) 0%, rgba(22, 24, 25, 0.76) 0%), 
+                url("https://assets.nflxext.com/ffe/siteui/vlv3/638e9299-0637-42d1-ba39-54ade4cf2bf6/web/AZ-en-20250203-TRIFECTA-perspective_ff49e843-8632-46c7-b3cd-24cff5caac9f_small.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+  }
+  
