@@ -1,19 +1,15 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 
-const ClientRoute = ({ children }) => {
-  const { isAuthenticated, user } = useSelector(state => state.auth);
+const ClientRoute = () => {
+  const isAuthenticated =
+    localStorage.getItem('token');
 
   if (!isAuthenticated) {
     return <Navigate to="/client/login" />;
   }
 
-  if (user?.role === 'admin') {
-    return <Navigate to="/admin/dashboard" />;
-  }
-
-  return children;
+  return <Outlet />;
 };
 
 export default ClientRoute;

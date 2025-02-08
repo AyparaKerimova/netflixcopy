@@ -11,8 +11,6 @@ const ClientLogin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login, { isLoading }] = useLoginMutation();
-  const [loginError, setLoginError] = useState('');
-
 
   const handleSubmit = async (values) => {
     try {
@@ -24,8 +22,8 @@ const ClientLogin = () => {
         toast.success('Giriş başarılı!');
       }
     } catch (error) {
-      setLoginError(error?.data?.message || 'Giriş yapılırken bir hata oluştu.');
-      toast.error(loginError);
+      const errorMessage = error?.data?.message || 'Giriş yapılırken bir hata oluştu.';
+      toast.error(errorMessage); 
     }
   };
 
@@ -59,8 +57,6 @@ const ClientLogin = () => {
             />
             <ErrorMessage name="password" component="div" className="error" />
           </div>
-
-          {loginError && <div className="error-message">{loginError}</div>}
 
           <button type="submit" disabled={isLoading}>
             {isLoading ? 'Giriş yapılıyor...' : 'Giriş Yap'}

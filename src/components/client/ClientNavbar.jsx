@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ClientNavbar = () => {
   return (
@@ -6,7 +7,6 @@ const ClientNavbar = () => {
         <header>
         <nav>
           <Link to="/client/dashboard">Dashboard</Link>
-          <Link to="/home">Home</Link>
         </nav>
       </header>
     </>

@@ -7,7 +7,7 @@ const AdminNavbar = () => {
     <header>
         <nav>
           <Link to="/admin/dashboard">Dashboard</Link>
-          <Link to="/home">Home</Link>
+
         </nav>
       </header>
     </>
