@@ -1,0 +1,13 @@
+.slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.slide img{
+    width: 90vw;
+    height: 100vh;
+    border-radius: 16px;
+    object-fit: cover;
+    clip-path: polygon(50% 0%, 100% 0, 100% 35%, 100% 78%, 73% 73%, 49% 71%, 26% 74%, 0 79%, 0 35%, 0 0);
+}
+

@@ -1,0 +1,1 @@
+export const BASE_URL = "https://mvcfolder-api.onrender.com/api/v1"
