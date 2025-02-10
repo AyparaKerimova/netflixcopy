@@ -15,6 +15,8 @@ import MembershipPlan from './pages/client/MembershipPlan.jsx';
 import ClientPayment from './pages/client/ClientPayment.jsx';
 import AdminLogin from './pages/admin/AdminLogin.jsx';
 import ClientDashboard from './pages/client/ClientDashboard.jsx';
+import AddMovie from './pages/admin/AddMovie.jsx';
+import AddSerie from './pages/admin/AddSerie.jsx';
 
 const App = () => {
   return (
@@ -29,6 +31,8 @@ const App = () => {
         </Route>
         <Route path="/admin/login" element={<AdminLogin />} />
 
+        <Route path='/admin/add-movie' element={<AddMovie/>}/>
+        <Route path='/admin/add-serie' element={<AddSerie/>}/>
         <Route element={<ClientRoute />}>
           <Route element={<ClientLayout />}>
             <Route path="/client/dashboard" element={<ClientDashboard />} />
