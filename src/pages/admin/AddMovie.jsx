@@ -3,6 +3,7 @@ import React from "react";
 import { movieSchema } from "../../validations/movie";
 import axios from "axios";
 import { BASE_URL } from "../../constants/api";
+import { Link } from "react-router-dom";
 
 const AddMovie = () => {
   const formik = useFormik({
@@ -46,6 +47,8 @@ const AddMovie = () => {
         />
         <div className="flex items-center justify-center p-12">
           <div className="mx-auto w-full max-w-[550px]">
+          <h1 className="text-white text-4xl font-semibold mb-3">Add Movie</h1>
+          <Link to="/admin/dashboard" className="bg-white rounded p-1">Go To Dashboard</Link>
             <form onSubmit={formik.handleSubmit}>
               <div className="mb-5">
                 <label className="mb-3 block text-base font-medium text-white">

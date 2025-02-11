@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import { seriesSchema } from "../../validations/serie";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const api = axios.create({
   baseURL: 'https://mvcfolder-api.onrender.com/api/v1',
@@ -119,6 +120,8 @@ const AddSerie = () => {
       />
       <div className="flex items-center justify-center p-12">
         <div className="mx-auto w-full max-w-[550px]">
+        <h1 className="text-white text-4xl font-semibold mb-3">Add Serie</h1>
+        <Link to="/admin/dashboard" className="bg-white rounded p-1">Go To Dashboard</Link>
           {submitStatus.error && (
             <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
               {submitStatus.error}
