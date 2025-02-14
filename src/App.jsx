@@ -25,6 +25,7 @@ import ClientMovieDetails from './pages/client/ClientMovieDetails.jsx';
 import ClientSerieDetails from './pages/client/ClientSerieDetails.jsx';
 import ClientMoviePlayer from './pages/client/ClientMoviePlayer.jsx';
 import ClientSeriePlayer from './pages/client/ClientSeriePlayer.jsx';
+import ClientProfile from './pages/client/ClientProfile.jsx';
 
 const App = () => {
   return (
@@ -60,6 +61,7 @@ const App = () => {
         <Route path="/client-registration" element={<ClientRegister />} />
         <Route path="/membership-plan" element={<MembershipPlan />} />
         <Route path="/payment" element={<ClientPayment />} />
+        <Route path="/client/profile/:id" element={<ClientProfile />} />
         <Route path='/client/movie-details/:id' element={<ClientMovieDetails/>}/>
         <Route path='/client/serie-details/:id' element={<ClientSerieDetails/>}/>
         <Route path='/client/movie-player/:id' element={<ClientMoviePlayer/>}/>

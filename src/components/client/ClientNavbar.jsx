@@ -3,13 +3,12 @@ import React from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BASE_URL } from '../../constants/api';
+import { useSelector } from "react-redux";
 
 const ClientNavbar = () => {
-  useEffect(()=>{
-    async function getUser(id){
-      const resp = axios.get(BASE_URL+`/users/${id}`)
-    }
-  },[]);
+  const user = useSelector((state) => state.auth.user);
+  
+  if (!user) return null;
   
   return (
     <>
@@ -29,8 +28,10 @@ const ClientNavbar = () => {
             <Link className="text-white">Newest</Link>
             <Link className="text-white">My List</Link>
           </div>
-          <div>
-
+          <div className="flex gap-6 items-center">
+          <Link to={`/client/profile/${user._id}`}>
+          <i className="fa-regular fa-user text-white text-2xl"></i>
+        </Link>
             <i className="fa-regular fa-bell text-white text-2xl mr-3"></i>
           </div>
         </nav>
