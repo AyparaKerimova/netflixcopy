@@ -1,15 +1,23 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Play, ChevronLeft, VolumeX, Volume2 } from "lucide-react";
+import { Play, ChevronLeft, VolumeX, Volume2, Download } from "lucide-react";
 import { BASE_URL } from "../../constants/api";
 
 const ClientMovieDetails = () => {
   const { id } = useParams();
-  const [movie, setMovie] = useState({ title: "", movieTrailer: "", description: "", cast: [], genre: [] });
+  const [movie, setMovie] = useState({ 
+    title: "", 
+    movieTrailer: "", 
+    description: "", 
+    cast: [], 
+    genre: [],
+    movieUrl: "" 
+  });
   const videoRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
   const [isVideoReady, setIsVideoReady] = useState(false);
+  const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     async function fetchMovie() {
@@ -43,6 +51,35 @@ const ClientMovieDetails = () => {
     if (videoRef.current) {
       videoRef.current.muted = !isMuted;
       setIsMuted(!isMuted);
+    }
+  };
+
+  const handleDownload = async () => {
+    try {
+      setDownloading(true);
+      
+      const response = await axios({
+        url: movie.movieUrl,
+        method: 'GET',
+        responseType: 'blob',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      const blob = new Blob([response.data], { type: 'video/mp4' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `${movie.title}.mp4`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Download failed:', error);
+    } finally {
+      setDownloading(false);
     }
   };
 
@@ -89,16 +126,16 @@ const ClientMovieDetails = () => {
                   <Play className="w-5 h-5" />
                   <span>Play</span>
                 </Link>
-                {/* <button
-                  onClick={toggleMute}
-                  className="p-3 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors"
+                <button
+                  onClick={handleDownload}
+                  disabled={downloading}
+                  className={`inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-md font-medium transition-colors ${
+                    downloading ? 'opacity-75 cursor-not-allowed' : ''
+                  }`}
                 >
-                  {isMuted ? (
-                    <VolumeX className="w-5 h-5" />
-                  ) : (
-                    <Volume2 className="w-5 h-5" />
-                  )}
-                </button> */}
+                  <Download className={`w-5 h-5 ${downloading ? 'animate-pulse' : ''}`} />
+                  <span>{downloading ? 'Downloading...' : 'Download'}</span>
+                </button>
               </div>
             </div>
           </div>
@@ -119,9 +156,16 @@ const ClientMovieDetails = () => {
               </div>
               <div>
                 <h3 className="text-gray-400 text-lg mb-2">Genres</h3>
-                <p className="text-white">
-                  {Array.isArray(movie.genre) && movie.genre.join(", ")}
-                </p>
+                <div className="flex flex-wrap gap-2">
+                  {Array.isArray(movie.genre) && movie.genre.map((genre, index) => (
+                    <span
+                      key={index}
+                      className="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >
+                      {genre}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

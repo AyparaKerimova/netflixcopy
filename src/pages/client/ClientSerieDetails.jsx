@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import { Play, ChevronLeft, VolumeX, Volume2, ChevronDown, Star } from "lucide-react";
+import { Play, ChevronLeft, VolumeX, Volume2, ChevronDown, Star, Download } from "lucide-react";
 import { BASE_URL } from "../../constants/api";
 
 const ClientSerieDetails = () => {
@@ -21,6 +21,7 @@ const ClientSerieDetails = () => {
     status: "ongoing",
     maturityRating: ""
   });
+  const [downloading, setDownloading] = useState({});
   const videoRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
   const [isVideoReady, setIsVideoReady] = useState(false);
@@ -60,11 +61,37 @@ const ClientSerieDetails = () => {
     }
   };
 
+  const handleDownload = async (videoUrl, episodeIndex) => {
+    try {
+      setDownloading(prev => ({ ...prev, [episodeIndex]: true }));
+      
+      const response = await axios({
+        url: videoUrl,
+        method: 'GET',
+        responseType: 'blob',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
+      const blob = new Blob([response.data], { type: 'video/mp4' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `${series.title}_Episode_${episodeIndex + 1}.mp4`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Download failed:', error);
+    } finally {
+      setDownloading(prev => ({ ...prev, [episodeIndex]: false }));
+    }
+  };
 
   return (
     <div className="min-h-screen bg-black">
-
       <Link 
         to="/client/dashboard" 
         className="fixed top-6 left-6 z-20 text-white hover:text-gray-300 transition-colors"
@@ -108,16 +135,6 @@ const ClientSerieDetails = () => {
                   <Play className="w-5 h-5" />
                   <span>Play</span>
                 </Link>
-                {/* <button
-                  onClick={toggleMute}
-                  className="p-3 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors"
-                >
-                  {isMuted ? (
-                    <VolumeX className="w-5 h-5" />
-                  ) : (
-                    <Volume2 className="w-5 h-5" />
-                  )}
-                </button> */}
               </div>
             </div>
           </div>
@@ -176,44 +193,46 @@ const ClientSerieDetails = () => {
               <h2 className="text-2xl font-semibold text-white">Episodes</h2>
             </div>
             <div className="space-y-4">
-  {Array.isArray(series.serieVideos) && series.serieVideos.map((episode, index) => (
-    <Link key={index} to={`/client/serie-player/${id}/${index}`}>
-    <div
-      className="bg-zinc-900 rounded-lg overflow-hidden transition-all duration-300"
-    >
-      <button
-        className="w-full text-left p-4 flex items-center justify-between text-white hover:bg-zinc-800 transition-colors"
-      >
-        <div className="flex items-center gap-4">
-          <div className="relative group">
-            <img
-              src={series.serieCover}
-              alt={series.title}
-              className="w-40 h-24 object-cover rounded"
-            />
-            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-              <Play className="w-8 h-8" />
+              {Array.isArray(series.serieVideos) && series.serieVideos.map((episode, index) => (
+                <div key={index} className="bg-zinc-900 rounded-lg overflow-hidden transition-all duration-300">
+                  <div className="w-full text-left p-4 flex items-center justify-between text-white hover:bg-zinc-800 transition-colors">
+                    <Link 
+                      to={`/client/serie-player/${id}/${index}`}
+                      className="flex items-center gap-4 flex-1"
+                    >
+                      <div className="relative group">
+                        <img
+                          src={series.serieCover}
+                          alt={series.title}
+                          className="w-40 h-24 object-cover rounded"
+                        />
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <Play className="w-8 h-8" />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-400">
+                            {index + 1}.
+                          </span>
+                          <h4 className="font-medium">{series.title}</h4>
+                        </div>
+                        <p className="text-sm text-gray-400 mt-1">
+                          {series.description}
+                        </p>
+                      </div>
+                    </Link>
+                    <button
+                      onClick={() => handleDownload(episode.videoUrl, index)}
+                      className="ml-4 p-2 hover:bg-zinc-700 rounded-full transition-colors"
+                      disabled={downloading[index]}
+                    >
+                      <Download className={`w-5 h-5 ${downloading[index] ? 'animate-pulse' : ''}`} />
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-gray-400">
-                {index + 1}.
-              </span>
-              <h4 className="font-medium">{series.title}</h4>
-            </div>
-            <p className="text-sm text-gray-400 mt-1">
-              {series.description}
-            </p>
-          </div>
-        </div>    
-      </button>
-    </div>
-    </Link>
-  ))}
-</div>
-
-
           </div>
         </div>
       </div>

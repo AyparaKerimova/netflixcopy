@@ -20,7 +20,9 @@ const ClientNavbar = () => {
             <Link className="text-white">Newest</Link>
             <Link className="text-white">My List</Link>
           </div>
-          <i className="fa-regular fa-bell text-white text-2xl mr-3"></i>
+          <div>
+            <i className="fa-regular fa-bell text-white text-2xl mr-3"></i>
+          </div>
         </nav>
       </header>
     </>
