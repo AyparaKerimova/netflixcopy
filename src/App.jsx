@@ -17,6 +17,14 @@ import AdminLogin from './pages/admin/AdminLogin.jsx';
 import ClientDashboard from './pages/client/ClientDashboard.jsx';
 import AddMovie from './pages/admin/AddMovie.jsx';
 import AddSerie from './pages/admin/AddSerie.jsx';
+import AdminMovieDetails from './pages/admin/AdminMovieDetails.jsx';
+import AdminSerieDetails from './pages/admin/AdminSerieDetails.jsx';
+import AdminMoviePlayer from './pages/admin/AdminMoviePlayer.jsx';
+import AdminSeriePlayer from './pages/admin/AdminSeriePlayer.jsx';
+import ClientMovieDetails from './pages/client/ClientMovieDetails.jsx';
+import ClientSerieDetails from './pages/client/ClientSerieDetails.jsx';
+import ClientMoviePlayer from './pages/client/ClientMoviePlayer.jsx';
+import ClientSeriePlayer from './pages/client/ClientSeriePlayer.jsx';
 
 const App = () => {
   return (
@@ -33,6 +41,14 @@ const App = () => {
 
         <Route path='/admin/add-movie' element={<AddMovie/>}/>
         <Route path='/admin/add-serie' element={<AddSerie/>}/>
+        <Route path='/admin/messages' element={<h1>message</h1>}/>
+        <Route path='/admin/settings' element={<h1>settings</h1>}/>
+        <Route path='/admin/statistics' element={<h1>statistics</h1>}/>
+        <Route path='/admin/movie-details/:id' element={<AdminMovieDetails/>}/>
+        <Route path='/admin/serie-details/:id' element={<AdminSerieDetails/>}/>
+        <Route path='/admin/movie-player/:id' element={<AdminMoviePlayer/>}/>
+        <Route path='/admin/serie-player/:id/:index' element={<AdminSeriePlayer/>}/>
+
         <Route element={<ClientRoute />}>
           <Route element={<ClientLayout />}>
             <Route path="/client/dashboard" element={<ClientDashboard />} />
@@ -44,6 +60,10 @@ const App = () => {
         <Route path="/client-registration" element={<ClientRegister />} />
         <Route path="/membership-plan" element={<MembershipPlan />} />
         <Route path="/payment" element={<ClientPayment />} />
+        <Route path='/client/movie-details/:id' element={<ClientMovieDetails/>}/>
+        <Route path='/client/serie-details/:id' element={<ClientSerieDetails/>}/>
+        <Route path='/client/movie-player/:id' element={<ClientMoviePlayer/>}/>
+        <Route path='/client/serie-player/:id/:index' element={<ClientSeriePlayer/>}/>
       </Routes>
     </Provider>
   );
