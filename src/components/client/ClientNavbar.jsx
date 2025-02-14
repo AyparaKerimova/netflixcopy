@@ -1,7 +1,16 @@
+import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { BASE_URL } from '../../constants/api';
 
 const ClientNavbar = () => {
+  useEffect(()=>{
+    async function getUser(id){
+      const resp = axios.get(BASE_URL+`/users/${id}`)
+    }
+  },[]);
+  
   return (
     <>
       <header className="z-10 fixed top-0 right-0 left-0 bg-black opacity-90">
@@ -21,6 +30,7 @@ const ClientNavbar = () => {
             <Link className="text-white">My List</Link>
           </div>
           <div>
+
             <i className="fa-regular fa-bell text-white text-2xl mr-3"></i>
           </div>
         </nav>

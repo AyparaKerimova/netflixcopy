@@ -21,6 +21,7 @@ const ClientLogin = () => {
           setCredentials({ user: response.user, token: response.token })
         );
         localStorage.setItem("token", response.token);
+        localStorage.setItem("user", JSON.stringify(response.user));
         navigate("/client/dashboard");
         toast.success("Giriş başarılı!");
       }
