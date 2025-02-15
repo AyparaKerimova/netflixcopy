@@ -1,7 +1,14 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import {logout} from '../../store/slices/authSlice'
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const { user, token } = useSelector((state) => state.auth);
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <>
       <div className="flex justify-between items-center">
@@ -17,9 +24,20 @@ const Navbar = () => {
             <option value="">English</option>
             <option value="">Russian</option>
           </select>
+          {user && token ? (
+          <button
+            onClick={handleLogout}
+            className="bg-red-600 text-white rounded px-4 py-1"
+          >
+            Log Out
+          </button>
+        ) : (
           <Link to="/client/login">
-            <p className=" bg-white rounded w-18 text-center">Sign In</p>
+            <p className="bg-white text-black rounded text-center px-4 py-1">
+              Sign In
+            </p>
           </Link>
+        )}
         </div>
       </div>
     </>
