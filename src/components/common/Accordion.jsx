@@ -24,9 +24,9 @@ const Accordion = () => {
 
   return (
     <div className="w-4/5 mx-auto mt-6">
-      <ul className="shadow-lg border border-gray-500 rounded-md">
+      <ul className="shadow-lg rounded-md">
         {accordionData.map((item, index) => (
-          <li key={index} className="border-b bg-gray-800 border-gray-200">
+          <li key={index} className="border-b bg-gray-800 border-gray-700 rounded mt-1">
             <button
               type="button"
               className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none"

@@ -7,23 +7,25 @@ import TrendingMovies from "../components/common/TrendingMovies";
 import { useSelector } from "react-redux";
 import OfferCards from "../components/common/OfferCards";
 import Accordion from "../components/common/Accordion";
+import { useTranslation } from "react-i18next";
 
 const HomePage = () => {
   const { user, token } = useSelector((state) => state.auth);
+  const { t } = useTranslation();
   return (
     <>
       <div className={styles.homeBackground}>
         <Navbar />
         <Slider />
         <p className="text-center text-gray-300 text-lg mt-10">
-          Ready to watch? Create an account or restart your membership.
+        {t("readytowatch")}
         </p>
         {user && token ? (
         <Link
           to="/client/dashboard"
           className="mt-12 text-center px-12 py-4 bg-red-600 text-white font-bold rounded-full hover:-translate-y-1 hover:shadow-lg mx-auto flex justify-center w-46"
         >
-          Continue to watch
+          {t("continue")}
         </Link>
       ) : (
         <Link

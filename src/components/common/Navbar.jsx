@@ -1,10 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {logout} from '../../store/slices/authSlice'
+import {logout} from '../../store/slices/authSlice';
+import { useTranslation } from "react-i18next";
+import LanguageSelector from "../../../LanguageSelector";
+import "../../../i18n";
+
 const Navbar = () => {
   const dispatch = useDispatch();
   const { user, token } = useSelector((state) => state.auth);
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -20,21 +25,18 @@ const Navbar = () => {
           alt=""
         />
         <div className="flex gap-4 items-center mr-4">
-          <select name="" className="border text-white rounded p-1">
-            <option value="">English</option>
-            <option value="">Russian</option>
-          </select>
+        <LanguageSelector/>
           {user && token ? (
           <button
             onClick={handleLogout}
             className="bg-red-600 text-white rounded px-4 py-1"
           >
-            Log Out
+            {t("logout")}
           </button>
         ) : (
           <Link to="/client/login">
             <p className="bg-white text-black rounded text-center px-4 py-1">
-              Sign In
+            {t("signin")}
             </p>
           </Link>
         )}
