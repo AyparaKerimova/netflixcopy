@@ -26,6 +26,7 @@ import ClientSerieDetails from './pages/client/ClientSerieDetails.jsx';
 import ClientMoviePlayer from './pages/client/ClientMoviePlayer.jsx';
 import ClientSeriePlayer from './pages/client/ClientSeriePlayer.jsx';
 import ClientProfile from './pages/client/ClientProfile.jsx';
+import Chat from './components/common/Chat.jsx';
 
 const App = () => {
   return (
@@ -42,7 +43,7 @@ const App = () => {
 
         <Route path='/admin/add-movie' element={<AddMovie/>}/>
         <Route path='/admin/add-serie' element={<AddSerie/>}/>
-        <Route path='/admin/messages' element={<h1>message</h1>}/>
+        <Route path='/admin/messages/:id' element={<Chat/>}/>
         <Route path='/admin/settings' element={<h1>settings</h1>}/>
         <Route path='/admin/statistics' element={<h1>statistics</h1>}/>
         <Route path='/admin/movie-details/:id' element={<AdminMovieDetails/>}/>
@@ -66,6 +67,7 @@ const App = () => {
         <Route path='/client/serie-details/:id' element={<ClientSerieDetails/>}/>
         <Route path='/client/movie-player/:id' element={<ClientMoviePlayer/>}/>
         <Route path='/client/serie-player/:id/:index' element={<ClientSeriePlayer/>}/>
+        <Route path='/client/messages/:id' element={<Chat/>}/>
       </Routes>
     </Provider>
   );

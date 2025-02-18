@@ -15,6 +15,8 @@ import { Link } from "react-router-dom";
 
 const ClientDashboard = () => {
   const [content, setContent] = useState([]);
+  const userId = JSON.parse(localStorage.getItem("user"))._id;
+
   const fetchMoviesAndSeries = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -60,7 +62,7 @@ const ClientDashboard = () => {
 
   return (
     <>
-      <div className={styles.dashboard}>
+      <div className={`${styles.dashboard}`}>
         <img
           className="absolute bottom-0"
           width={400}
@@ -85,16 +87,29 @@ const ClientDashboard = () => {
         >
           {content.map((item, index) => (
             <SwiperSlide key={index}>
-              <Link to={item.movieCover? `/client/movie-details/${item._id}`: `/client/serie-details/${item._id}` }>
-              <img
-                style={{ width: "300px", height: "200px", objectFit: "cover" }}
-                src={item.movieCover || item.serieCover}
-                alt={item.title}
-              />
+              <Link
+                to={
+                  item.movieCover
+                    ? `/client/movie-details/${item._id}`
+                    : `/client/serie-details/${item._id}`
+                }
+              >
+                <img
+                  style={{
+                    width: "300px",
+                    height: "200px",
+                    objectFit: "cover",
+                  }}
+                  src={item.movieCover || item.serieCover}
+                  alt={item.title}
+                />
               </Link>
             </SwiperSlide>
           ))}
         </Swiper>
+        <Link to={`/client/messages/${userId}`} className="block">
+          <i className="fa-solid fa-message bg-red-600 text-white text-4xl p-4 fixed right-3 bottom-16 rounded z-50"></i>
+        </Link>
       </div>
     </>
   );

@@ -43,6 +43,7 @@ const HomePage = () => {
           <h2 className="text-gray-200 text-4xl font-medium mt-16"> Frequently Asked Questions</h2>
           <Accordion/>
         </div>
+        
       </div>
     </>
   );

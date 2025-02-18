@@ -2,6 +2,8 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 
 const AdminNavbar = () => {
+  const userId = JSON.parse(localStorage.getItem("user"))._id;
+
   return (
     <>
       <div className="flex h-screen">
@@ -41,7 +43,7 @@ const AdminNavbar = () => {
               </Link>
               <hr className="mt-3"/>
               <Link
-                to="/admin/messages"
+                to={`/admin/messages/${userId}`}
                 className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"
               >
                 <i className="fa-regular fa-message ml-1 text-lg mr-3"></i>
