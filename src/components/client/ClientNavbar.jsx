@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 const ClientNavbar = () => {
   const user = useSelector((state) => state.auth.user);
+  console.log(user);
   
   if (!user) return null;
   
@@ -26,11 +27,11 @@ const ClientNavbar = () => {
             <Link className="text-white">Series</Link>
             <Link className="text-white">Movies</Link>
             <Link className="text-white">Newest</Link>
-            <Link className="text-white">My List</Link>
+            <Link to={`/client/list/${user._id}`} className="text-white">My List</Link>
           </div>
           <div className="flex gap-6 items-center">
           <Link to={`/client/profile/${user._id}`}>
-          <i className="fa-regular fa-user text-white text-2xl"></i>
+          <img style={{width:"50px",height:"50px",objectFit:"cover",borderRadius:"50%"}}src={user.profileImage} alt={user.nickname} />
         </Link>
             <i className="fa-regular fa-bell text-white text-2xl mr-3"></i>
           </div>

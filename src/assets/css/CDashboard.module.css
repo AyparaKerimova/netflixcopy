@@ -6,3 +6,39 @@
     position: relative;
     background-size: cover;
 }
+.movieCard {
+    position: relative;
+    height: 200px;
+    cursor: pointer;
+  }
+  
+  .movieImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .movieCard:hover .movieImage {
+    transform: scale(1.05);
+  }
+  
+  .addButton {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .movieCard:hover .addButton {
+    opacity: 1;
+  }
+  
