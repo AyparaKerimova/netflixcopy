@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
@@ -7,6 +7,7 @@ import { useLoginMutation } from "../../store/api/authApi";
 import { setCredentials } from "../../store/slices/authSlice";
 import { loginSchema } from "../../validations/auth";
 import styles from "../../assets/css/CLogin.module.css";
+import { handleGoogleLogin } from "../../config/firebaseConfig";
 
 const ClientLogin = () => {
   const dispatch = useDispatch();
@@ -17,9 +18,7 @@ const ClientLogin = () => {
     try {
       const response = await login(values).unwrap();
       if (response.token) {
-        dispatch(
-          setCredentials({ user: response.user, token: response.token })
-        );
+        dispatch(setCredentials({ user: response.user, token: response.token }));
         localStorage.setItem("token", response.token);
         localStorage.setItem("user", JSON.stringify(response.user));
         navigate("/client/dashboard");
@@ -40,7 +39,7 @@ const ClientLogin = () => {
           width="200"
           height="200"
           src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-          alt=""
+          alt="Netflix Logo"
         />
 
         <Formik
@@ -77,7 +76,16 @@ const ClientLogin = () => {
               <h6 className="text-gray-400">New to Netflix?</h6>
               <Link className="text-white font-semibold" to="/client-registration">Sign Up Now</Link>
             </div>
-              <p className="text-gray-300 text-sm w-80">This page is protected by Google reCAPTCHA to ensure you're not a bot. <span className="text-blue-500"><a href="https://policies.google.com/privacy">Learn more.</a></span></p>
+            <p className="text-gray-300 text-sm w-80">This page is protected by Google reCAPTCHA to ensure you're not a bot. <span className="text-blue-500"><a href="https://policies.google.com/privacy">Learn more.</a></span></p>
+
+            <div className="mt-4">
+              {/* <button
+                onClick={handleGoogleLogin}
+                className="flex justify-center items-center gap-2 bg-blue-600 text-white px-6 py-4 rounded text-2xl"
+              >
+                Sign In with Google
+              </button> */}
+            </div>
           </Form>
         </Formik>
       </div>

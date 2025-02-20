@@ -5,6 +5,7 @@ import { authApi } from "../../store/api/authApi";
 import { useFormik } from "formik";
 import { signupSchema } from "../../validations/auth";
 import { setCredentials } from "../../store/slices/authSlice";
+import { handleGoogleSignup } from "../../config/firebaseConfig";
 
 const ClientRegister = () => {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const ClientRegister = () => {
       }
     },
   });
+
   return (
     <>
       <nav className="flex items-center justify-between">
@@ -37,7 +39,7 @@ const ClientRegister = () => {
           width="200"
           height="200"
           src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-          alt=""
+          alt="Netflix Logo"
         />
         <Link to="/client/login" className="mr-20 text-xl font-medium">
           <h5>Sign In</h5>
@@ -71,9 +73,9 @@ const ClientRegister = () => {
               </div>
             )}
             <input
-             id="fullName"
-             name="fullName"
-             {...formik.getFieldProps("fullName")}
+              id="fullName"
+              name="fullName"
+              {...formik.getFieldProps("fullName")}
               type="text"
               placeholder="Full name"
               className="border pl-4 py-4 rounded border-black"
@@ -84,9 +86,9 @@ const ClientRegister = () => {
               </div>
             )}
             <input
-                id="nickname"
-                name="nickname"
-                {...formik.getFieldProps("nickname")}
+              id="nickname"
+              name="nickname"
+              {...formik.getFieldProps("nickname")}
               type="text"
               placeholder="Nickname"
               className="border pl-4 py-4 rounded border-black"
@@ -97,9 +99,9 @@ const ClientRegister = () => {
               </div>
             )}
             <input
-            id="password"
-            name="password"
-            {...formik.getFieldProps("password")}
+              id="password"
+              name="password"
+              {...formik.getFieldProps("password")}
               type="text"
               placeholder="Add a password"
               className="border pl-4 py-4 rounded border-black"
@@ -110,9 +112,9 @@ const ClientRegister = () => {
               </div>
             )}
             <input
-            id="confirmPassword"
-            name="confirmPassword"
-            {...formik.getFieldProps("confirmPassword")}
+              id="confirmPassword"
+              name="confirmPassword"
+              {...formik.getFieldProps("confirmPassword")}
               type="text"
               placeholder="Confirm password"
               className="border pl-4 py-4 rounded border-black"
@@ -130,6 +132,14 @@ const ClientRegister = () => {
               Next
             </button>
           </form>
+          <div className="mt-4">
+          {/* <button
+            className="bg-blue-600 text-white px-8 py-3 mt-4 rounded text-xl"
+            onClick={handleGoogleSignup}
+          >
+            Sign Up with Google
+          </button> */}
+          </div>
         </div>
       </div>
     </>

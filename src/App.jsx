@@ -64,13 +64,7 @@ const App = () => {
         <Route element={<ClientRoute />}>
           <Route element={<ClientLayout />}>
             <Route path="/client/dashboard" element={<ClientDashboard />} />
-            <Route
-              path="/registration-previous"
-              element={<RegistrationPrevious />}
-            />
-            <Route path="/client-registration" element={<ClientRegister />} />
-            <Route path="/membership-plan" element={<MembershipPlan />} />
-            <Route path="/payment" element={<ClientPayment />} />
+      
             <Route path="/client/profile/:id" element={<ClientProfile />} />
             <Route
               path="/client/movie-details/:id"
@@ -93,6 +87,13 @@ const App = () => {
           </Route>
         </Route>
         <Route path="/client/login" element={<ClientLogin />} />
+        <Route
+              path="/registration-previous"
+              element={<RegistrationPrevious />}
+            />
+            <Route path="/client-registration" element={<ClientRegister />} />
+            <Route path="/membership-plan" element={<MembershipPlan />} />
+            <Route path="/payment" element={<ClientPayment />} />
       </Routes>
     </Provider>
   );
