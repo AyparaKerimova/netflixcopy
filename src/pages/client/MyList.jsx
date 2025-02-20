@@ -59,7 +59,7 @@ const MyList = () => {
                   }>
               <img
                 src={item?.serieId?.serieCover || item?.movieId?.movieCover}
-                alt={item.title}
+                alt={item.serieId.title || item.movieId.title}
                 className="rounded-xl w-full h-52 object-cover shadow-lg transform transition duration-300 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300">

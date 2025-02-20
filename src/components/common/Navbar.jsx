@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {logout} from '../../store/slices/authSlice';
 import { useTranslation } from "react-i18next";
-import LanguageSelector from "../../../LanguageSelector";
+import LanguageSelector from "../../services/language/LanguageSelector";
 import "../../../i18n";
 
 const Navbar = () => {

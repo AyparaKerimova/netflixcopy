@@ -14,6 +14,25 @@ const ClientDashboard = () => {
   const [userList, setUserList] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?._id;
+  const [list, setList] = useState([]);
+
+  const fetchList = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(`${BASE_URL}/list/${userId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setList(response.data);
+    } catch (error) {
+      console.error("Error fetching list:", error);
+      toast.error("Failed to load your list!", { theme: "dark" });
+    }
+  };
+
+
+  useEffect(() => {
+    fetchList();
+  }, []);
 
   const fetchMoviesAndSeries = async () => {
     try {
@@ -83,7 +102,7 @@ const ClientDashboard = () => {
 
   return (
     <>
-      <div className={styles.dashboard}>
+      <div className={`${styles.dashboard}`}>
         <img
           className="absolute bottom-0"
           width={400}
@@ -95,8 +114,8 @@ const ClientDashboard = () => {
         </div>
       </div>
 
-      <div>
-        <h2>Netflix-style Dashboard</h2>
+      <div className="bg-black">
+        <h2 className="text-white text-3xl py-5 ml-1">Awarded</h2>
         <Swiper
           slidesPerView={6}
           spaceBetween={30}
@@ -128,6 +147,35 @@ const ClientDashboard = () => {
                 >
                   {isItemInList(item) ? "Added" : "+ List"}
                 </button>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <h2 className="text-white text-3xl py-5 ml-1">My List</h2>
+        <Swiper
+          slidesPerView={6}
+          spaceBetween={30}
+          freeMode={true}
+          pagination={{ clickable: true }}
+          modules={[FreeMode, Pagination]}
+          className="mySwiper"
+        >
+          {list && list.map((item, index) => (
+            <SwiperSlide key={index}>
+              <div className={styles.movieCard}>
+                <Link
+                 to={
+                  item?.movieId?.movieCover
+                    ? `/client/movie-details/${item.movieId._id}`
+                    : `/client/serie-details/${item.serieId._id}`
+                }
+                >
+                  <img
+                    className={styles.movieImage}
+                    src={item.movieId.movieCover || item.serieId.serieCover}
+                    alt={item?.serieId?.title || item?.movieId?.title}
+                  />
+                </Link>
               </div>
             </SwiperSlide>
           ))}

@@ -1,8 +1,5 @@
-import axios from "axios";
 import React from "react";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { BASE_URL } from '../../constants/api';
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/slices/authSlice";
 
