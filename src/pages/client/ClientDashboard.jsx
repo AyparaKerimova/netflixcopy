@@ -172,7 +172,7 @@ const ClientDashboard = () => {
                 >
                   <img
                     className={styles.movieImage}
-                    src={item.movieId.movieCover || item.serieId.serieCover}
+                    src={item?.movieId?.movieCover || item?.serieId?.serieCover}
                     alt={item?.serieId?.title || item?.movieId?.title}
                   />
                 </Link>

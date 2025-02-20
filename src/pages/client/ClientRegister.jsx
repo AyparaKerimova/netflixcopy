@@ -133,12 +133,12 @@ const ClientRegister = () => {
             </button>
           </form>
           <div className="mt-4">
-          {/* <button
+          <button
             className="bg-blue-600 text-white px-8 py-3 mt-4 rounded text-xl"
             onClick={handleGoogleSignup}
           >
             Sign Up with Google
-          </button> */}
+          </button>
           </div>
         </div>
       </div>

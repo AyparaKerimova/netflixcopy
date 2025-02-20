@@ -30,7 +30,7 @@ const ClientPayment = () => {
           Your payment is encrypted and you can change how you pay anytime.
         </p>
         <Link
-          to="/client/dashboard"
+          to="/client/login"
           className="bg-white border text-black px-44 py-6 rounded"
         >
         Pay for registration <span className="text-xl">&gt;</span>

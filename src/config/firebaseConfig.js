@@ -21,22 +21,27 @@ const handleGoogleSignup = async () => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
     const user = result.user;
-    
+
+    const fullName = user.displayName || '';
+    const nickname = fullName.split(' ')[0] || '';
+
     const userDoc = await getDoc(doc(db, "users", user.uid));
 
     if (!userDoc.exists()) {
       await setDoc(doc(db, "users", user.uid), {
-        uid: user.uid,
-        displayName: user.displayName,
+        fullName,
+        nickname,
         email: user.email,
-        photoURL: user.photoURL,
+        profileImage: user.photoURL || 'default-profile.jpg',
         createdAt: new Date().toISOString(),
       });
     }
 
     console.log("Google Sign-Up successful:", user);
+    return user;
   } catch (error) {
     console.error("Error signing up with Google:", error.message);
+    throw error; 
   }
 };
 
@@ -46,8 +51,10 @@ const handleGoogleLogin = async () => {
     const user = result.user;
 
     console.log("Google Login successful:", user);
+    return user; 
   } catch (error) {
     console.error("Error logging in with Google:", error.message);
+    throw error; 
   }
 };
 
