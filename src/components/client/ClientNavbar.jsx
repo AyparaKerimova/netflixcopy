@@ -3,14 +3,20 @@ import React from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BASE_URL } from '../../constants/api';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../store/slices/authSlice";
 
 const ClientNavbar = () => {
   const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+
   console.log(user);
-  
+
   if (!user) return null;
-  
+  const handleLogout = () => {
+        dispatch(logout());
+        navigate("/")
+      };
   return (
     <>
       <header className="z-10 fixed top-0 right-0 left-0 bg-black opacity-90">
@@ -34,6 +40,7 @@ const ClientNavbar = () => {
           <img style={{width:"50px",height:"50px",objectFit:"cover",borderRadius:"50%"}}src={user.profileImage} alt={user.nickname} />
         </Link>
             <i className="fa-regular fa-bell text-white text-2xl mr-3"></i>
+            <button onClick={handleLogout} className="text-white bg-red-600 rounded px-3 py-1">Logout</button>
           </div>
         </nav>
       </header>

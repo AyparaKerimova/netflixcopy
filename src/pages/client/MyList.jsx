@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -52,6 +52,11 @@ const MyList = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {list && list.map((item) => (
             <div key={item?._id} className="relative group">
+              <Link  to={
+                    item?.movieId?.movieCover
+                      ? `/client/movie-details/${item.movieId._id}`
+                      : `/client/serie-details/${item.serieId._id}`
+                  }>
               <img
                 src={item?.serieId?.serieCover || item?.movieId?.movieCover}
                 alt={item.title}
@@ -66,6 +71,7 @@ const MyList = () => {
                   Remove ❌
                 </button>
               </div>
+              </Link>
             </div>
           ))}
         </div>

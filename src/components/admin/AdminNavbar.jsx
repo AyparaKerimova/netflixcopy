@@ -1,9 +1,17 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { logout } from "../../store/slices/authSlice";
 
 const AdminNavbar = () => {
   const userId = JSON.parse(localStorage.getItem("user"))._id;
   const messagesLength = JSON.parse(localStorage.getItem("messages")).length
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+   const handleLogout = () => {
+      dispatch(logout());
+      navigate("/")
+    };
   return (
     <>
       <div className="flex h-screen">
@@ -66,6 +74,7 @@ const AdminNavbar = () => {
                 Statistics
               </Link>
             </nav>
+            <button onClick={handleLogout} className="text-white bg-red-600 rounded w-2/3 mx-auto mb-2">Logout</button>
           </div>
         </div>
         <div className="flex flex-col flex-1 overflow-y-auto">
