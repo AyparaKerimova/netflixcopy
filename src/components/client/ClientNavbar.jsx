@@ -27,9 +27,8 @@ const ClientNavbar = () => {
               alt=""
             />
             <Link className="text-white" to="/client/dashboard">Home</Link>
-            <Link className="text-white">Series</Link>
-            <Link className="text-white">Movies</Link>
-            <Link className="text-white">Newest</Link>
+            <Link to={`/client/series`} className="text-white">Series</Link>
+            <Link to={`/client/movies`} className="text-white">Movies</Link>
             <Link to={`/client/list/${user._id}`} className="text-white">My List</Link>
           </div>
           <div className="flex gap-6 items-center">

@@ -6,6 +6,14 @@
     position: relative;
     background-size: cover;
 }
+.series {
+  background-image: url("https://media3.giphy.com/media/vbPzAifIrGycdxnvsO/giphy.gif?cid=6c09b952cbx6bveirmly3yslg4aoowfp2gvozz96fslpka08&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g");
+  background-position: center;
+  height: 80vh;
+  background-repeat: no-repeat;
+  position: relative;
+  background-size: cover;
+}
 .movieCard {
     position: relative;
     height: 200px;

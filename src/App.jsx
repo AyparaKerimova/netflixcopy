@@ -30,6 +30,8 @@ import Chat from "./components/common/Chat.jsx";
 import MyList from "./pages/client/MyList.jsx";
 import Charts from "./components/common/Charts.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import ClientMovies from "./pages/client/ClientMovies.jsx";
+import ClientSeries from "./pages/client/ClientSeries.jsx";
 
 const App = () => {
   return (
@@ -85,6 +87,8 @@ const App = () => {
             />
             <Route path="/client/messages/:id" element={<Chat />} />
             <Route path="/client/list/:userId" element={<MyList />} />
+            <Route path="/client/movies" element={<ClientMovies/>}/>
+            <Route path="/client/series" element={<ClientSeries/>}/>
           </Route>
         </Route>
         <Route path="/client/login" element={<ClientLogin />} />
