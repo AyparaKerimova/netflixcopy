@@ -29,6 +29,7 @@ import ClientProfile from "./pages/client/ClientProfile.jsx";
 import Chat from "./components/common/Chat.jsx";
 import MyList from "./pages/client/MyList.jsx";
 import Charts from "./components/common/Charts.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 const App = () => {
   return (
@@ -94,6 +95,7 @@ const App = () => {
             <Route path="/client-registration" element={<ClientRegister />} />
             <Route path="/membership-plan" element={<MembershipPlan />} />
             <Route path="/payment" element={<ClientPayment />} />
+            <Route path="/*" element={<NotFound/>}/>
       </Routes>
     </Provider>
   );

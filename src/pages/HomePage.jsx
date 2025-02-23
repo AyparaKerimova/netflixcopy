@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import OfferCards from "../components/common/OfferCards";
 import Accordion from "../components/common/Accordion";
 import { useTranslation } from "react-i18next";
+import Footer from "../components/common/Footer";
 
 const HomePage = () => {
   const { user, token } = useSelector((state) => state.auth);
@@ -43,7 +44,7 @@ const HomePage = () => {
           <h2 className="text-gray-200 text-4xl font-medium mt-16"> Frequently Asked Questions</h2>
           <Accordion/>
         </div>
-        
+        <Footer/>
       </div>
     </>
   );
