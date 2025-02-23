@@ -5,7 +5,7 @@ import { logout } from "../../store/slices/authSlice";
 
 const AdminNavbar = () => {
   const userId = JSON.parse(localStorage.getItem("user"))._id;
-  const messagesLength = JSON.parse(localStorage.getItem("messages")).length
+  const messagesLength = JSON.parse(localStorage.getItem("messages"))?.length || " "
   const dispatch = useDispatch();
   const navigate = useNavigate()
    const handleLogout = () => {
@@ -55,7 +55,7 @@ const AdminNavbar = () => {
                 className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"
               >
                 <i className="fa-regular fa-message ml-1 text-lg mr-3"></i>
-                Messages <span className="ml-2 bg-red-600 rounded px-2">{messagesLength}</span>
+                Messages <span className="ml-2 bg-red-600 rounded px-2">{messagesLength || " "}</span>
               </Link>
               <hr className="mt-3"/>
               <Link

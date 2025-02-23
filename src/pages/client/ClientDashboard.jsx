@@ -8,12 +8,14 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import { FreeMode, Pagination } from "swiper/modules";
 import { Link } from "react-router-dom";
+import Footer from "../../components/common/Footer";
 
 const ClientDashboard = () => {
   const [content, setContent] = useState([]);
   const [copyContent,setCopyContent] = useState([]);
   const [userList, setUserList] = useState([]);
   const [searchQuery,setSearchQuery] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState("");
 
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?._id;
@@ -104,8 +106,10 @@ const ClientDashboard = () => {
     );
   };
 
-  const filtered = content.filter((item)=>item.title.toLowerCase().includes(searchQuery.toLowerCase()));
-
+  let filtered = content.filter((item)=>item.title.toLowerCase().includes(searchQuery.toLowerCase()));
+   filtered = selectedGenre
+    ? content.filter((item) => item.genre.includes(selectedGenre))
+    : content;
   return (
     <>
       <div className={`${styles.dashboard}`}>
@@ -122,6 +126,17 @@ const ClientDashboard = () => {
 
       <div className="bg-black">
         <input className="border rounded mt-12 ml-2 px-3 py-2 text-gray-300" placeholder="search..." type="text" onChange={(e)=>setSearchQuery(e.target.value)}/>
+        <select className=" rounded px-3 py-2 text-gray-300 ml-4" name="" onChange={(e) => setSelectedGenre(e.target.value)}>
+          <option value="">All</option>
+          <option value="drama">Drama</option>
+          <option value="crime">Crime</option>
+          <option value="comedy">Comedy</option>
+          <option value="romantic">Romantic</option>
+          <option value="scifi">Sci-Fi</option>
+          <option value="detective">Detective</option>
+          <option value="horror">horror</option>
+          <option value="thriller">thriller</option>
+        </select>
         <h2 className="text-white text-3xl py-5 ml-1">Awarded</h2>
         <Swiper
           slidesPerView={6}
@@ -191,7 +206,9 @@ const ClientDashboard = () => {
         <Link to={`/client/messages/${userId}`} className="block">
           <i className="fa-solid fa-message bg-red-600 text-white text-4xl p-4 fixed right-3 bottom-16 rounded z-50"></i>
         </Link>
+        <Footer/>
       </div>
+
     </>
   );
 };

@@ -28,6 +28,7 @@ import ClientSeriePlayer from "./pages/client/ClientSeriePlayer.jsx";
 import ClientProfile from "./pages/client/ClientProfile.jsx";
 import Chat from "./components/common/Chat.jsx";
 import MyList from "./pages/client/MyList.jsx";
+import Charts from "./components/common/Charts.jsx";
 
 const App = () => {
   return (
@@ -46,7 +47,7 @@ const App = () => {
         <Route path="/admin/add-serie" element={<AddSerie />} />
         <Route path="/admin/messages/:id" element={<Chat />} />
         <Route path="/admin/settings" element={<h1>settings</h1>} />
-        <Route path="/admin/statistics" element={<h1>statistics</h1>} />
+        <Route path="/admin/statistics" element={<Charts/>} />
         <Route
           path="/admin/movie-details/:id"
           element={<AdminMovieDetails />}
@@ -60,7 +61,6 @@ const App = () => {
           path="/admin/serie-player/:id/:index"
           element={<AdminSeriePlayer />}
         />
-
         <Route element={<ClientRoute />}>
           <Route element={<ClientLayout />}>
             <Route path="/client/dashboard" element={<ClientDashboard />} />
