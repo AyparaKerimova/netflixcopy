@@ -106,10 +106,10 @@ const ClientDashboard = () => {
     );
   };
 
-  let filtered = content.filter((item)=>item.title.toLowerCase().includes(searchQuery.toLowerCase()));
+  let filtered = [...content].filter((item)=>item.title.toLowerCase().includes(searchQuery.toLowerCase()));
    filtered = selectedGenre
-    ? content.filter((item) => item.genre.includes(selectedGenre))
-    : content;
+    ? filtered.filter((item) => item.genre.includes(selectedGenre))
+    : filtered;
   return (
     <>
       <div className={`${styles.dashboard}`}>

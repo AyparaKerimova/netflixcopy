@@ -86,19 +86,19 @@ const ClientMovies = () => {
 
   let filtered = content.filter((item)=>item.title.toLowerCase().includes(searchQuery.toLowerCase()));
    filtered = selectedGenre
-    ? content.filter((item) => item.genre.includes(selectedGenre))
-    : content;
+    ? filtered.filter((item) => item.genre.includes(selectedGenre))
+    : filtered;
   return (
     <>
-      <div className={`${styles.series}`}>
+      <div className={`${styles.movies}`}>
         <img
-          className="absolute bottom-0"
+          className="absolute bottom-0 rounded"
           width={400}
-          src="https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABc-Lz5VWQvtOl6Zpx9ltsxhqGcix53cs38POtgZfByjT-b83PzcGtiBNYL4d7ySlhd_161sry1evArYLyu8kwnAnSTzhxe8qWHJFmxIlRWHA3STl9NsFdTtPPUB0G-arVJSCNDlgG9JDP1-GGk9L84VcgBiX4qHGrmhLfy36_tdI3QWEf2NDiQ.png?r=53c"
+          src="https://www.heyuguys.com/images/2013/12/Interstellar-Logo.jpg"
           alt="squid game"
         />
         <div className="absolute bottom-12 right-0 bg-gray-500 opacity-80 px-3 py-1">
-          <p className="text-white text-lg">16 +</p>
+          <p className="text-white text-lg">12 +</p>
         </div>
       </div>
 
@@ -151,7 +151,6 @@ const ClientMovies = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <h2 className="text-white text-3xl py-5 ml-1">My List</h2>
         <Swiper
           slidesPerView={6}
           spaceBetween={30}

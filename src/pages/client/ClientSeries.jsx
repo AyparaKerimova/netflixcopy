@@ -108,8 +108,8 @@ const ClientSeries = () => {
 
   let filtered = content.filter((item)=>item.title.toLowerCase().includes(searchQuery.toLowerCase()));
    filtered = selectedGenre
-    ? content.filter((item) => item.genre.includes(selectedGenre))
-    : content;
+    ? filtered.filter((item) => item.genre.includes(selectedGenre))
+    : filtered;
   return (
     <>
       <div className={`${styles.series}`}>
@@ -173,7 +173,6 @@ const ClientSeries = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <h2 className="text-white text-3xl py-5 ml-1">My List</h2>
         <Swiper
           slidesPerView={6}
           spaceBetween={30}
