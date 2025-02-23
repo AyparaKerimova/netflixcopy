@@ -11,7 +11,10 @@ import { Link } from "react-router-dom";
 
 const ClientDashboard = () => {
   const [content, setContent] = useState([]);
+  const [copyContent,setCopyContent] = useState([]);
   const [userList, setUserList] = useState([]);
+  const [searchQuery,setSearchQuery] = useState("");
+
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?._id;
   const [list, setList] = useState([]);
@@ -71,6 +74,7 @@ const ClientDashboard = () => {
     const loadData = async () => {
       const data = await fetchMoviesAndSeries();
       setContent(data);
+      setCopyContent(data);
     };
     loadData();
     fetchUserList();
@@ -100,6 +104,8 @@ const ClientDashboard = () => {
     );
   };
 
+  const filtered = content.filter((item)=>item.title.toLowerCase().includes(searchQuery.toLowerCase()));
+
   return (
     <>
       <div className={`${styles.dashboard}`}>
@@ -115,6 +121,7 @@ const ClientDashboard = () => {
       </div>
 
       <div className="bg-black">
+        <input className="border rounded mt-12 ml-2 px-3 py-2 text-gray-300" placeholder="search..." type="text" onChange={(e)=>setSearchQuery(e.target.value)}/>
         <h2 className="text-white text-3xl py-5 ml-1">Awarded</h2>
         <Swiper
           slidesPerView={6}
@@ -124,7 +131,7 @@ const ClientDashboard = () => {
           modules={[FreeMode, Pagination]}
           className="mySwiper"
         >
-          {content.map((item, index) => (
+          {copyContent && filtered.map((item, index) => (
             <SwiperSlide key={index}>
               <div className={styles.movieCard}>
                 <Link
